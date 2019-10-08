@@ -32,11 +32,21 @@ public class StockManager
     /**
      * Receive a delivery of a particular product.
      * Increase the quantity of the product by the given amount.
+     * If the ID number is not found it will print a error message
      * @param id The ID of the product.
      * @param amount The amount to increase the quantity by.
      */
     public void delivery(int id, int amount)
     {
+        if (findProduct(id) != null)
+        {
+            findProduct(id).increaseQuantity(amount);
+        }
+        else
+        {
+            System.out.println("That Product is not listed in the inventory please " +
+                "add the product to stock first then try again.");
+        }
     }
     
     /**
