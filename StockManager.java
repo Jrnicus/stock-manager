@@ -4,8 +4,8 @@ import java.util.ArrayList;
  * Manage the stock in a business.
  * The stock is described by zero or more Products.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Steve Cate 
+ * @version 10/07/2019
  */
 public class StockManager
 {
@@ -41,11 +41,37 @@ public class StockManager
     
     /**
      * Try to find a product in the stock with the given id.
+     * @param ID of the product which is a int
      * @return The identified product, or null if there is none
      *         with a matching ID.
      */
     public Product findProduct(int id)
     {
+                for (Product product : stock)
+        {
+            if (id == product.getID())
+            {
+                return product;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Try to find a product in the stock by name.
+     * @param the name of the product which is a String
+     * @return The identified product, or null if there is none with a matching name
+     * 
+     */
+        public Product findProduct(String name)
+    {
+        for (Product product : stock)
+        {
+            if (name.equalsIgnoreCase(product.getName()))
+            {
+                return product;
+            }
+        }
         return null;
     }
     
@@ -62,9 +88,13 @@ public class StockManager
     }
 
     /**
-     * Print details of all the products.
+     * Print details of all the products in the ArrayList stock
      */
     public void printProductDetails()
     {
+        for (Product product : stock)
+        {
+            System.out.println(product.toString());
+        }    
     }
 }
