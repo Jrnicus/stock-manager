@@ -84,6 +84,10 @@ public class StockManager
      */
     public int numberInStock(int id)
     {
+        if (findProduct(id) != null)
+        {
+            return findProduct(id).getQuantity();
+        }
         return 0;
     }
 
