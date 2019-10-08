@@ -22,11 +22,22 @@ public class StockManager
 
     /**
      * Add a product to the list.
+     * This will also make sure that this id hasn't already been assigned
+     * to another product if it has it will display a error message for the user
+     * and the product will not be added.
      * @param item The item to be added.
      */
     public void addProduct(Product item)
     {
-        stock.add(item);
+        if (findProduct(item.getID()) == null)
+        {
+            stock.add(item);
+        }
+        else
+        {
+            System.out.println("Error: This product can not be added because it " +
+                "has the same ID as a product already in stock");
+        }
     }
     
     /**
@@ -69,7 +80,7 @@ public class StockManager
     
     /**
      * Try to find a product in the stock by name.
-     * @param the name of the product which is a String
+     * @param name the name of the product which is a String
      * @return The identified product, or null if there is none with a matching name
      * 
      */
@@ -110,5 +121,28 @@ public class StockManager
         {
             System.out.println(product.toString());
         }    
+    }
+    
+     /**
+     * This will print all products with stock level below a certain number 
+     * that is give as a parameter
+     * @param stockLevel the quantity to test if any products are below
+     */
+    public void printProductsBelowStockLevel(int stockLevel)
+    {
+        boolean anyProductsBelowStock = false;
+        System.out.println("Items with stock levels below: " + stockLevel);
+        for (Product product : stock)
+        {
+            if(product.getQuantity() < stockLevel)
+            {
+                anyProductsBelowStock = true;
+                System.out.println(product.toString());
+            }
+        }
+        if(!anyProductsBelowStock)
+        {
+            System.out.println("There are no items with stock levels below " + stockLevel);
+        }
     }
 }
